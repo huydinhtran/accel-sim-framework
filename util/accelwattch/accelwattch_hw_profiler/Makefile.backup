@@ -1,0 +1,57 @@
+TARGET = measureGpuPower
+
+CC := g++
+NVML_LIB_DIR := -L$(CUDA_INSTALL_PATH)/lib64/stubs/
+CFLAGS  := -Wall -I$(CUDA_INSTALL_PATH)/include/ -pthread
+#LDFLAGS := $(NVML_LIB_DIR) -lnvidia-ml 
+
+###########################################################################
+
+ARCH       := $(shell getconf LONG_BIT)
+OS         := $(shell cat /etc/issue)
+#RHEL_OS    := $(shell cat /etc/redhat-release)
+
+# Gets Driver Branch
+DRIVER_BRANCH := $(shell nvidia-smi | grep Driver | cut -f 3 -d' ' | cut -f 1 -d '.')
+
+# Location of the CUDA Toolkit
+CUDA_PATH ?= /usr/local/cuda
+
+DEB := $(shell dpkg -l | grep cuda)
+
+ifeq (${ARCH},$(filter ${ARCH},32 64))
+    # If correct architecture and libnvidia-ml library is not found
+    # within the environment, build using the stub library
+
+    ifneq (,$(findstring Ubuntu,$(OS)))
+        DEB := $(shell dpkg -l | grep cuda)
+        ifneq (,$(findstring cuda, $(DEB)))
+            NVML_LIB := /usr/lib/nvidia-$(DRIVER_BRANCH)
+        else
+            NVML_LIB := /lib${ARCH}
+        endif
+    endif
+
+
+else
+    NVML_LIB := ${CUDA_PATH}/lib${ARCH}/stubs/
+    $(info "libnvidia-ml.so.1" not found, using stub library.)
+endif
+
+
+ifneq (${ARCH},$(filter ${ARCH},32 64))
+	$(error Unknown architecture!)
+endif
+
+LDFLAGS := $(NVML_LIB_DIR) -lnvidia-ml -L $(NVML_LIB)
+
+
+###########################################################################
+
+
+$(TARGET): $(TARGET).cpp ip_connection.o bricklet_voltage_current_v2.o measureGpuPower.o   
+	$(CC) $(CFLAGS) $< -o $@ $(TARGET).cpp ip_connection.o bricklet_voltage_current_v2.o $(LDFLAGS) -lrt -lm -lpthread
+
+clean:
+	rm -rf $(TARGET)
+	rm -f *.o
