@@ -1,0 +1,5 @@
+ptxas info    : 4100 bytes gmem, 20480 bytes cmem[3]
+ptxas info    : Compiling entry function '_Z21binomialOptionsKernelv' for 'sm_61'
+ptxas info    : Function properties for _Z21binomialOptionsKernelv
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, 516 bytes smem, 320 bytes cmem[0]

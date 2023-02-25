@@ -1,0 +1,2 @@
+accel-sim.out: trace_driven.cc:78: address_type trace_shd_warp_t::get_start_trace_pc(): Assertion `warp_traces.size() > 0' failed.
+/var/lib/slurm-llnl/slurmd/job00397/slurm_script: line 51: 27671 Aborted                 (core dumped) /home/htran197/accel-sim-framework/gpu-simulator/../accelwattch_runs/pascal_sass_sim/gpgpu-sim-builds/accelsim-commit-f27c5430b80f8b73e4027c2c6d1a1db58dd4adea_modified_9.0/accel-sim.out -config ./gpgpusim.config -trace ./traces/kernelslist.g

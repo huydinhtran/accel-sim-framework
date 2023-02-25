@@ -1,0 +1,13 @@
+ptxas info    : 4 bytes gmem
+ptxas info    : Compiling entry function '_Z37bitonicMergeElementaryIntervalsKernelILj0EEvPjS0_S0_S0_S0_S0_jj' for 'sm_70'
+ptxas info    : Function properties for _Z37bitonicMergeElementaryIntervalsKernelILj0EEvPjS0_S0_S0_S0_S0_jj
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 18 registers, 3092 bytes smem, 408 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jj' for 'sm_70'
+ptxas info    : Function properties for _Z37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jj
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 18 registers, 3092 bytes smem, 408 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z23bitonicSortSharedKernelPjS_S_S_jj' for 'sm_70'
+ptxas info    : Function properties for _Z23bitonicSortSharedKernelPjS_S_S_jj
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 18 registers, 8192 bytes smem, 392 bytes cmem[0]

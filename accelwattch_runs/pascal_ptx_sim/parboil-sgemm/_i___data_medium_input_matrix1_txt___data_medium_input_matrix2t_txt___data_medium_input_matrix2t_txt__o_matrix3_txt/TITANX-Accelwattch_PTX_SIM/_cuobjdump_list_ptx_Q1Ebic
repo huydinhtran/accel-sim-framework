@@ -1,0 +1,5 @@
+parboil-sgemm.1.sm_60.ptx
+parboil-sgemm.2.sm_61.ptx
+parboil-sgemm.3.sm_62.ptx
+parboil-sgemm.4.sm_70.ptx
+parboil-sgemm.5.sm_75.ptx

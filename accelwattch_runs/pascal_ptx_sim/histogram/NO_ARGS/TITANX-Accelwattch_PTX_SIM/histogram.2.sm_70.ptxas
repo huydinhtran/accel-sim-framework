@@ -1,0 +1,9 @@
+ptxas info    : 4 bytes gmem
+ptxas info    : Compiling entry function '_Z23mergeHistogram256KernelPjS_j' for 'sm_70'
+ptxas info    : Function properties for _Z23mergeHistogram256KernelPjS_j
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 17 registers, 1024 bytes smem, 372 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z18histogram256KernelPjS_j' for 'sm_70'
+ptxas info    : Function properties for _Z18histogram256KernelPjS_j
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 28 registers, 6144 bytes smem, 372 bytes cmem[0]

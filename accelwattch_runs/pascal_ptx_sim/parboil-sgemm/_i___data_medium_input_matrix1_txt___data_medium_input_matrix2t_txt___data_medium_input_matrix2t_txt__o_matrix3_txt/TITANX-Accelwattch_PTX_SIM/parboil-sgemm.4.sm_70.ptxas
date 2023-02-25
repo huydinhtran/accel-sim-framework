@@ -1,0 +1,5 @@
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z9mysgemmNTPKfiS0_iPfiiff' for 'sm_70'
+ptxas info    : Function properties for _Z9mysgemmNTPKfiS0_iPfiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 42 registers, 512 bytes smem, 408 bytes cmem[0]

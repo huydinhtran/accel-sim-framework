@@ -1,0 +1,52 @@
+#! /bin/bash
+#SBATCH -J parboil-mri-q-_i___data_large_input_64_64_64_dataset_bin__o_64_64_64_dataset_out.accelsim-commit-f27c5430b80f8b73e4027c2c6d1a1db58dd4adea_modified_9.0
+#SBATCH --threads-per-core=1
+#SBATCH --cpus-per-task=1
+#SBATCH --nodes=1
+#SBATCH --mem-per-cpu=11G
+#SBACTH --time=200:00:00,
+#SBATCH -p batch
+#SBATCH --mail-type=END,FAIL
+#SBATCH --export=ALL
+#SBATCH --output=/tmp/parboil-mri-q-_i___data_large_input_64_64_64_dataset_bin__o_64_64_64_dataset_out.accelsim-commit-f27c5430b80f8b73e4027c2c6d1a1db58dd4adea_modified_9.0.o%j
+#SBATCH --error=/tmp/parboil-mri-q-_i___data_large_input_64_64_64_dataset_bin__o_64_64_64_dataset_out.accelsim-commit-f27c5430b80f8b73e4027c2c6d1a1db58dd4adea_modified_9.0.e%j
+
+copy_output() {
+    mv /tmp/parboil-mri-q-_i___data_large_input_64_64_64_dataset_bin__o_64_64_64_dataset_out.accelsim-commit-f27c5430b80f8b73e4027c2c6d1a1db58dd4adea_modified_9.0.e$SLURM_JOB_ID ./parboil-mri-q-_i___data_large_input_64_64_64_dataset_bin__o_64_64_64_dataset_out.accelsim-commit-f27c5430b80f8b73e4027c2c6d1a1db58dd4adea_modified_9.0.e$SLURM_JOB_ID
+    mv /tmp/parboil-mri-q-_i___data_large_input_64_64_64_dataset_bin__o_64_64_64_dataset_out.accelsim-commit-f27c5430b80f8b73e4027c2c6d1a1db58dd4adea_modified_9.0.o$SLURM_JOB_ID ./parboil-mri-q-_i___data_large_input_64_64_64_dataset_bin__o_64_64_64_dataset_out.accelsim-commit-f27c5430b80f8b73e4027c2c6d1a1db58dd4adea_modified_9.0.o$SLURM_JOB_ID
+}
+
+trap copy_output ERR
+
+set -e
+
+if [ "$GPGPUSIM_SETUP_ENVIRONMENT_WAS_RUN" != "1" ]; then
+    export GPGPUSIM_ROOT=/home/htran197/accel-sim-framework/gpu-simulator/gpgpu-sim
+    source $GPGPUSIM_ROOT/setup_environment
+else
+    echo "Skipping setup_environment - already set"
+fi
+
+echo "doing: export -n PTX_SIM_USE_PTX_FILE"
+export -n PTX_SIM_USE_PTX_FILE
+echo "doing: export LD_LIBRARY_PATH=/home/htran197/accel-sim-framework/gpu-simulator/../accelwattch_runs/pascal_sass_sim/gpgpu-sim-builds/accelsim-commit-f27c5430b80f8b73e4027c2c6d1a1db58dd4adea_modified_9.0:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH=/home/htran197/accel-sim-framework/gpu-simulator/../accelwattch_runs/pascal_sass_sim/gpgpu-sim-builds/accelsim-commit-f27c5430b80f8b73e4027c2c6d1a1db58dd4adea_modified_9.0:$LD_LIBRARY_PATH
+echo "doing: cd /home/htran197/accel-sim-framework/gpu-simulator/../accelwattch_runs/pascal_sass_sim/parboil-mri-q/_i___data_large_input_64_64_64_dataset_bin__o_64_64_64_dataset_out/TITANX-Accelwattch_SASS_SIM"
+cd /home/htran197/accel-sim-framework/gpu-simulator/../accelwattch_runs/pascal_sass_sim/parboil-mri-q/_i___data_large_input_64_64_64_dataset_bin__o_64_64_64_dataset_out/TITANX-Accelwattch_SASS_SIM
+echo "doing: export OPENCL_CURRENT_TEST_PATH=/home/htran197/accel-sim-framework/gpu-simulator/../accelwattch_runs/pascal_sass_sim/parboil-mri-q/_i___data_large_input_64_64_64_dataset_bin__o_64_64_64_dataset_out/TITANX-Accelwattch_SASS_SIM"
+export OPENCL_CURRENT_TEST_PATH=/home/htran197/accel-sim-framework/gpu-simulator/../accelwattch_runs/pascal_sass_sim/parboil-mri-q/_i___data_large_input_64_64_64_dataset_bin__o_64_64_64_dataset_out/TITANX-Accelwattch_SASS_SIM
+echo "doing: export OPENCL_REMOTE_GPU_HOST=REPLACE_REMOTE_HOST"
+export OPENCL_REMOTE_GPU_HOST=REPLACE_REMOTE_HOST
+echo "doing "
+
+echo "doing: export PATH=/home/htran197/anaconda3/envs/python2/bin:/home/htran197/anaconda3/bin:/usr/local/cuda-11.0/bin:/usr/local/cuda/bin:/home/htran197/.vscode-server/bin/6261075646f055b99068d3688932416f2346dd3b/bin/remote-cli:/home/htran197/anaconda3/condabin:/home/htran197/accel-sim-framework/gpu-simulator/gpgpu-sim/bin:/usr/local/cuda-11.0/bin:/home/htran197/anaconda3/bin:/usr/local/cuda-11.0/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/bin"
+export PATH=/home/htran197/anaconda3/envs/python2/bin:/home/htran197/anaconda3/bin:/usr/local/cuda-11.0/bin:/usr/local/cuda/bin:/home/htran197/.vscode-server/bin/6261075646f055b99068d3688932416f2346dd3b/bin/remote-cli:/home/htran197/anaconda3/condabin:/home/htran197/accel-sim-framework/gpu-simulator/gpgpu-sim/bin:/usr/local/cuda-11.0/bin:/home/htran197/anaconda3/bin:/usr/local/cuda-11.0/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/bin
+
+# Uncomment to force blocking torque launches
+echo "doing export CUDA_LAUNCH_BLOCKING=1"
+export CUDA_LAUNCH_BLOCKING=1
+
+
+echo "doing:  /home/htran197/accel-sim-framework/gpu-simulator/../accelwattch_runs/pascal_sass_sim/gpgpu-sim-builds/accelsim-commit-f27c5430b80f8b73e4027c2c6d1a1db58dd4adea_modified_9.0/accel-sim.out  -config ./gpgpusim.config -trace ./traces/kernelslist.g"
+ /home/htran197/accel-sim-framework/gpu-simulator/../accelwattch_runs/pascal_sass_sim/gpgpu-sim-builds/accelsim-commit-f27c5430b80f8b73e4027c2c6d1a1db58dd4adea_modified_9.0/accel-sim.out  -config ./gpgpusim.config -trace ./traces/kernelslist.g
+copy_output

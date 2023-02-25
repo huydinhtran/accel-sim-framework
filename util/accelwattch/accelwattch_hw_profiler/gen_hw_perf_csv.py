@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Copyright (c) 2018-2021, Vijay Kandiah, Junrui Pan, Mahmoud Khairy, Scott Peverelle, Timothy Rogers, Tor M. Aamodt, Nikos Hardavellas
 # Northwestern University, Purdue University, The University of British Columbia
@@ -300,7 +300,8 @@ for file in path:
         combine_kernel = combine_kernel[1:]
         # print("kernel", "<" + kernel_names[kernel] + ">","found",count,"times")
 
-        if(combine_kernel.shape[0]) is 0:
+        # if(combine_kernel.shape[0]) is 0:
+        if(combine_kernel.shape[0]) == 0:
             # parsing error or string comparision error
             exit("ERROR,", kernel_names[kernel], "not found")
 

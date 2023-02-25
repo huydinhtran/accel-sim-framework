@@ -45,7 +45,8 @@ fi
 config=${1}
 power_file=accelwattch_power_report.log
 mkdir -p ${report_dir}
-runs_dir=$ACCELSIM_ROOT/../accelwattch_runs/${config}
+#runs_dir=$ACCELSIM_ROOT/../accelwattch_runs/${config}
+runs_dir=~/accel-sim-framework/accelwattch_runs/${config}
 power_dir=${report_dir}/${config}
 if [ -d ${power_dir} ] ; then
 	rm -r ${power_dir}

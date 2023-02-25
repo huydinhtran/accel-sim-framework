@@ -1,0 +1,1 @@
+/var/lib/slurm-llnl/slurmd/job00454/slurm_script: line 51:  6672 Segmentation fault      (core dumped) /home/htran197/accel-sim-framework/gpu-simulator/../util/accelwattch/accelwattch_benchmarks/validation/parboil-sad -i ./data/large/input/reference.bin,./data/large/input/frame.bin -o out.bin

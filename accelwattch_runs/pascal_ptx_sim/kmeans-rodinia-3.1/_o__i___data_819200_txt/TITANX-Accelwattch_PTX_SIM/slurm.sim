@@ -1,0 +1,52 @@
+#! /bin/bash
+#SBATCH -J kmeans-rodinia-3.1-_o__i___data_819200_txt.gpgpu-sim_git-commit-971dd69e8a6c355c8cc4c8bd997db51376ff520a_modified_1.0
+#SBATCH --threads-per-core=1
+#SBATCH --cpus-per-task=1
+#SBATCH --nodes=1
+#SBATCH --mem-per-cpu=4G
+#SBACTH --time=200:00:00,
+#SBATCH -p batch
+#SBATCH --mail-type=END,FAIL
+#SBATCH --export=ALL
+#SBATCH --output=/tmp/kmeans-rodinia-3.1-_o__i___data_819200_txt.gpgpu-sim_git-commit-971dd69e8a6c355c8cc4c8bd997db51376ff520a_modified_1.0.o%j
+#SBATCH --error=/tmp/kmeans-rodinia-3.1-_o__i___data_819200_txt.gpgpu-sim_git-commit-971dd69e8a6c355c8cc4c8bd997db51376ff520a_modified_1.0.e%j
+
+copy_output() {
+    mv /tmp/kmeans-rodinia-3.1-_o__i___data_819200_txt.gpgpu-sim_git-commit-971dd69e8a6c355c8cc4c8bd997db51376ff520a_modified_1.0.e$SLURM_JOB_ID ./kmeans-rodinia-3.1-_o__i___data_819200_txt.gpgpu-sim_git-commit-971dd69e8a6c355c8cc4c8bd997db51376ff520a_modified_1.0.e$SLURM_JOB_ID
+    mv /tmp/kmeans-rodinia-3.1-_o__i___data_819200_txt.gpgpu-sim_git-commit-971dd69e8a6c355c8cc4c8bd997db51376ff520a_modified_1.0.o$SLURM_JOB_ID ./kmeans-rodinia-3.1-_o__i___data_819200_txt.gpgpu-sim_git-commit-971dd69e8a6c355c8cc4c8bd997db51376ff520a_modified_1.0.o$SLURM_JOB_ID
+}
+
+trap copy_output ERR
+
+set -e
+
+if [ "$GPGPUSIM_SETUP_ENVIRONMENT_WAS_RUN" != "1" ]; then
+    export GPGPUSIM_ROOT=/home/htran197/accel-sim-framework/gpu-simulator/gpgpu-sim
+    source $GPGPUSIM_ROOT/setup_environment
+else
+    echo "Skipping setup_environment - already set"
+fi
+
+echo "doing: export -n PTX_SIM_USE_PTX_FILE"
+export -n PTX_SIM_USE_PTX_FILE
+echo "doing: export LD_LIBRARY_PATH=/home/htran197/accel-sim-framework/gpu-simulator/../accelwattch_runs/pascal_ptx_sim/gpgpu-sim-builds/gpgpu-sim_git-commit-971dd69e8a6c355c8cc4c8bd997db51376ff520a_modified_1.0:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH=/home/htran197/accel-sim-framework/gpu-simulator/../accelwattch_runs/pascal_ptx_sim/gpgpu-sim-builds/gpgpu-sim_git-commit-971dd69e8a6c355c8cc4c8bd997db51376ff520a_modified_1.0:$LD_LIBRARY_PATH
+echo "doing: cd /home/htran197/accel-sim-framework/gpu-simulator/../accelwattch_runs/pascal_ptx_sim/kmeans-rodinia-3.1/_o__i___data_819200_txt/TITANX-Accelwattch_PTX_SIM"
+cd /home/htran197/accel-sim-framework/gpu-simulator/../accelwattch_runs/pascal_ptx_sim/kmeans-rodinia-3.1/_o__i___data_819200_txt/TITANX-Accelwattch_PTX_SIM
+echo "doing: export OPENCL_CURRENT_TEST_PATH=/home/htran197/accel-sim-framework/gpu-simulator/../accelwattch_runs/pascal_ptx_sim/kmeans-rodinia-3.1/_o__i___data_819200_txt/TITANX-Accelwattch_PTX_SIM"
+export OPENCL_CURRENT_TEST_PATH=/home/htran197/accel-sim-framework/gpu-simulator/../accelwattch_runs/pascal_ptx_sim/kmeans-rodinia-3.1/_o__i___data_819200_txt/TITANX-Accelwattch_PTX_SIM
+echo "doing: export OPENCL_REMOTE_GPU_HOST=REPLACE_REMOTE_HOST"
+export OPENCL_REMOTE_GPU_HOST=REPLACE_REMOTE_HOST
+echo "doing "
+
+echo "doing: export PATH=/home/htran197/accel-sim-framework/gpu-simulator/gpgpu-sim/bin:/usr/local/cuda-11.0//bin:/home/htran197/anaconda3/envs/python2/bin:/home/htran197/anaconda3/bin:/usr/local/cuda-11.0/bin:/usr/local/cuda/bin:/home/htran197/.vscode-server/bin/1ad8d514439d5077d2b0b7ee64d2ce82a9308e5a/bin/remote-cli:/home/htran197/anaconda3/condabin:/home/htran197/accel-sim-framework/gpu-simulator/gpgpu-sim/bin:/usr/local/cuda-11.0/bin:/home/htran197/anaconda3/bin:/usr/local/cuda-11.0/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/bin"
+export PATH=/home/htran197/accel-sim-framework/gpu-simulator/gpgpu-sim/bin:/usr/local/cuda-11.0//bin:/home/htran197/anaconda3/envs/python2/bin:/home/htran197/anaconda3/bin:/usr/local/cuda-11.0/bin:/usr/local/cuda/bin:/home/htran197/.vscode-server/bin/1ad8d514439d5077d2b0b7ee64d2ce82a9308e5a/bin/remote-cli:/home/htran197/anaconda3/condabin:/home/htran197/accel-sim-framework/gpu-simulator/gpgpu-sim/bin:/usr/local/cuda-11.0/bin:/home/htran197/anaconda3/bin:/usr/local/cuda-11.0/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/bin
+
+# Uncomment to force blocking torque launches
+echo "doing export CUDA_LAUNCH_BLOCKING=1"
+export CUDA_LAUNCH_BLOCKING=1
+
+
+echo "doing:  /home/htran197/accel-sim-framework/gpu-simulator/../util/accelwattch/accelwattch_benchmarks/validation/kmeans-rodinia-3.1 -o -i ./data/819200.txt"
+ /home/htran197/accel-sim-framework/gpu-simulator/../util/accelwattch/accelwattch_benchmarks/validation/kmeans-rodinia-3.1 -o -i ./data/819200.txt
+copy_output

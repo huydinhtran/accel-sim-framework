@@ -11,9 +11,6 @@ TITANXX:
 TITANK:
     base_file: "$GPGPUSIM_ROOT/configs/tested-cfgs/SM3_KEPLER_TITAN/gpgpusim.config"
 
-#Ampere RTX 3070
-RTX3070:
-    base_file: "$GPGPUSIM_ROOT/configs/tested-cfgs/SM86_RTX3070/gpgpusim.config"
 
 #Turing
 RTX2060:
@@ -62,8 +59,6 @@ PTX:
 # Extra configs - these are composable.
 # The names here will be appended to the basefile name with hyphens
 #   For example TITANX-L1ON-PTXPLUS
-MULTI_KERNEL:
-    extra_params: "-gpgpu_concurrent_kernel_sm 1"
 
 64SM:
     extra_params: "-gpgpu_n_clusters 64"
@@ -117,7 +112,7 @@ BOOKSIM:
 1132MHZ:
     extra_params: "-gpgpu_clock_domains 1132.0:1132.0:1132.0:850.0"
 
-LINEAR:
+NORM:
     extra_params: "-memory_partition_indexing 0"
 
 XOR:
@@ -138,17 +133,11 @@ VISUAL:
 RR:
     extra_params: "-gpgpu_scheduler lrr"
 
-GTO:
-    extra_params: "-gpgpu_scheduler gto"
-
 128B:
     extra_params: "-gpgpu_mem_addr_mapping dramid@7;00000000.00000000.00000000.00000000.0000RRRR.RRRRRRRR.RBBBCCCC.BCCSSSSS"
 
 256B:
     extra_params: "-gpgpu_mem_addr_mapping dramid@8;00000000.00000000.00000000.00000000.0000RRRR.RRRRRRRR.RBBBCCCB.CCCSSSSS"
-
-32B:
-    extra_params: "-gpgpu_mem_addr_mapping dramid@5;00000000.00000000.00000000.00000000.0000RRRR.RRRRRRRR.RBBBCCCC.BCCSSSSS"
 
 FRFCFS:
     extra_params: "-gpgpu_dram_scheduler 1"

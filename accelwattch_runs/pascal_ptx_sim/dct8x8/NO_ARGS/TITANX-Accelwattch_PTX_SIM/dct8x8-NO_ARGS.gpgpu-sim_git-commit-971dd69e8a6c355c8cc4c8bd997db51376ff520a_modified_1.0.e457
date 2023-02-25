@@ -1,0 +1,1 @@
+/var/lib/slurm-llnl/slurmd/job00457/slurm_script: line 51: 11118 Segmentation fault      (core dumped) /home/htran197/accel-sim-framework/gpu-simulator/../util/accelwattch/accelwattch_benchmarks/validation/dct8x8

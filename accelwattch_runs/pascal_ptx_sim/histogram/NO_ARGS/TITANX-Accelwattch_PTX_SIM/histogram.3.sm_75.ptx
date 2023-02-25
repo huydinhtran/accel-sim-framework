@@ -1,0 +1,251 @@
+
+
+
+
+
+
+
+
+.version 7.0
+.target sm_75
+.address_size 64
+
+
+
+
+.global .align 4 .u32 _ZZN80_INTERNAL_58_tmpxft_000036c8_00000000_8_histogram256_compute_75_cpp1_ii_0e43e2cb18cooperative_groups4__v17details17_binary_partitionINS1_15coalesced_groupEEES4_RKT_bE8fullMask = -1;
+
+.visible .entry _Z18histogram256KernelPjS_j(
+.param .u64 _Z18histogram256KernelPjS_j_param_0,
+.param .u64 _Z18histogram256KernelPjS_j_param_1,
+.param .u32 _Z18histogram256KernelPjS_j_param_2
+)
+{
+.reg .pred %p<5>;
+.reg .b32 %r<63>;
+.reg .b64 %rd<9>;
+
+	.shared .align 4 .b8 _ZZ18histogram256KernelPjS_jE6s_Hist[6144];
+
+ld.param.u64 %rd3, [_Z18histogram256KernelPjS_j_param_0];
+ld.param.u64 %rd4, [_Z18histogram256KernelPjS_j_param_1];
+ld.param.u32 %r17, [_Z18histogram256KernelPjS_j_param_2];
+mov.u32 %r62, %tid.x;
+shl.b32 %r18, %r62, 2;
+mov.u32 %r19, _ZZ18histogram256KernelPjS_jE6s_Hist;
+add.s32 %r61, %r19, %r18;
+mov.u32 %r21, 0;
+st.shared.u32 [%r61], %r21;
+st.shared.u32 [%r61+768], %r21;
+st.shared.u32 [%r61+1536], %r21;
+st.shared.u32 [%r61+2304], %r21;
+st.shared.u32 [%r61+3072], %r21;
+st.shared.u32 [%r61+3840], %r21;
+st.shared.u32 [%r61+4608], %r21;
+st.shared.u32 [%r61+5376], %r21;
+barrier.sync 0;
+mov.u32 %r2, %ntid.x;
+mov.u32 %r3, %ctaid.x;
+mad.lo.s32 %r59, %r2, %r3, %r62;
+setp.ge.u32	%p1, %r59, %r17;
+@%p1 bra BB0_3;
+
+shl.b32 %r22, %r62, 3;
+and.b32 %r5, %r22, -256;
+mov.u32 %r23, %nctaid.x;
+mul.lo.s32 %r6, %r23, %r2;
+cvta.to.global.u64 %rd1, %rd4;
+
+BB0_2:
+mul.wide.u32 %rd5, %r59, 4;
+add.s64 %rd6, %rd1, %rd5;
+ld.global.u32 %r24, [%rd6];
+and.b32 %r25, %r24, 255;
+add.s32 %r26, %r25, %r5;
+shl.b32 %r27, %r26, 2;
+add.s32 %r29, %r19, %r27;
+atom.shared.add.u32 %r30, [%r29], 1;
+bfe.u32 %r31, %r24, 8, 8;
+add.s32 %r32, %r31, %r5;
+shl.b32 %r33, %r32, 2;
+add.s32 %r34, %r19, %r33;
+atom.shared.add.u32 %r35, [%r34], 1;
+bfe.u32 %r36, %r24, 16, 8;
+add.s32 %r37, %r36, %r5;
+shl.b32 %r38, %r37, 2;
+add.s32 %r39, %r19, %r38;
+atom.shared.add.u32 %r40, [%r39], 1;
+shr.u32 %r41, %r24, 24;
+add.s32 %r42, %r41, %r5;
+shl.b32 %r43, %r42, 2;
+add.s32 %r44, %r19, %r43;
+atom.shared.add.u32 %r45, [%r44], 1;
+add.s32 %r59, %r6, %r59;
+setp.lt.u32	%p2, %r59, %r17;
+@%p2 bra BB0_2;
+
+BB0_3:
+barrier.sync 0;
+setp.gt.u32	%p3, %r62, 255;
+@%p3 bra BB0_6;
+
+mad.lo.s32 %r60, %r3, 256, %r62;
+cvta.to.global.u64 %rd2, %rd3;
+
+BB0_5:
+ld.shared.u32 %r48, [%r61+1024];
+ld.shared.u32 %r49, [%r61];
+add.s32 %r50, %r48, %r49;
+ld.shared.u32 %r51, [%r61+2048];
+add.s32 %r52, %r51, %r50;
+ld.shared.u32 %r53, [%r61+3072];
+add.s32 %r54, %r53, %r52;
+ld.shared.u32 %r55, [%r61+4096];
+add.s32 %r56, %r55, %r54;
+ld.shared.u32 %r57, [%r61+5120];
+add.s32 %r58, %r57, %r56;
+mul.wide.u32 %rd7, %r60, 4;
+add.s64 %rd8, %rd2, %rd7;
+st.global.u32 [%rd8], %r58;
+add.s32 %r61, %r61, 768;
+add.s32 %r60, %r60, 192;
+add.s32 %r62, %r62, 192;
+setp.lt.u32	%p4, %r62, 256;
+@%p4 bra BB0_5;
+
+BB0_6:
+ret;
+}
+
+
+.visible .entry _Z23mergeHistogram256KernelPjS_j(
+.param .u64 _Z23mergeHistogram256KernelPjS_j_param_0,
+.param .u64 _Z23mergeHistogram256KernelPjS_j_param_1,
+.param .u32 _Z23mergeHistogram256KernelPjS_j_param_2
+)
+{
+.reg .pred %p<11>;
+.reg .b32 %r<48>;
+.reg .b64 %rd<9>;
+
+	.shared .align 4 .b8 _ZZ23mergeHistogram256KernelPjS_jE4data[1024];
+
+ld.param.u64 %rd2, [_Z23mergeHistogram256KernelPjS_j_param_0];
+ld.param.u64 %rd3, [_Z23mergeHistogram256KernelPjS_j_param_1];
+ld.param.u32 %r11, [_Z23mergeHistogram256KernelPjS_j_param_2];
+mov.u32 %r1, %tid.x;
+mov.u32 %r47, 0;
+setp.ge.u32	%p1, %r1, %r11;
+@%p1 bra BB1_3;
+
+mov.u32 %r14, %ctaid.x;
+mad.lo.s32 %r44, %r1, 256, %r14;
+cvta.to.global.u64 %rd1, %rd3;
+mov.u32 %r47, 0;
+mov.u32 %r45, %r1;
+
+BB1_2:
+mul.wide.u32 %rd4, %r44, 4;
+add.s64 %rd5, %rd1, %rd4;
+ld.global.u32 %r15, [%rd5];
+add.s32 %r47, %r15, %r47;
+add.s32 %r44, %r44, 65536;
+add.s32 %r45, %r45, 256;
+setp.lt.u32	%p2, %r45, %r11;
+@%p2 bra BB1_2;
+
+BB1_3:
+shl.b32 %r16, %r1, 2;
+mov.u32 %r17, _ZZ23mergeHistogram256KernelPjS_jE4data;
+add.s32 %r10, %r17, %r16;
+st.shared.u32 [%r10], %r47;
+barrier.sync 0;
+setp.gt.u32	%p3, %r1, 127;
+@%p3 bra BB1_5;
+
+ld.shared.u32 %r18, [%r10];
+ld.shared.u32 %r19, [%r10+512];
+add.s32 %r20, %r18, %r19;
+st.shared.u32 [%r10], %r20;
+
+BB1_5:
+barrier.sync 0;
+setp.gt.u32	%p4, %r1, 63;
+@%p4 bra BB1_7;
+
+ld.shared.u32 %r21, [%r10];
+ld.shared.u32 %r22, [%r10+256];
+add.s32 %r23, %r21, %r22;
+st.shared.u32 [%r10], %r23;
+
+BB1_7:
+barrier.sync 0;
+setp.gt.u32	%p5, %r1, 31;
+@%p5 bra BB1_9;
+
+ld.shared.u32 %r24, [%r10];
+ld.shared.u32 %r25, [%r10+128];
+add.s32 %r26, %r24, %r25;
+st.shared.u32 [%r10], %r26;
+
+BB1_9:
+barrier.sync 0;
+setp.gt.u32	%p6, %r1, 15;
+@%p6 bra BB1_11;
+
+ld.shared.u32 %r27, [%r10];
+ld.shared.u32 %r28, [%r10+64];
+add.s32 %r29, %r27, %r28;
+st.shared.u32 [%r10], %r29;
+
+BB1_11:
+barrier.sync 0;
+setp.gt.u32	%p7, %r1, 7;
+@%p7 bra BB1_13;
+
+ld.shared.u32 %r30, [%r10];
+ld.shared.u32 %r31, [%r10+32];
+add.s32 %r32, %r30, %r31;
+st.shared.u32 [%r10], %r32;
+
+BB1_13:
+barrier.sync 0;
+setp.gt.u32	%p8, %r1, 3;
+@%p8 bra BB1_15;
+
+ld.shared.u32 %r33, [%r10];
+ld.shared.u32 %r34, [%r10+16];
+add.s32 %r35, %r33, %r34;
+st.shared.u32 [%r10], %r35;
+
+BB1_15:
+barrier.sync 0;
+setp.gt.u32	%p9, %r1, 1;
+@%p9 bra BB1_17;
+
+ld.shared.u32 %r36, [%r10];
+ld.shared.u32 %r37, [%r10+8];
+add.s32 %r38, %r36, %r37;
+st.shared.u32 [%r10], %r38;
+
+BB1_17:
+barrier.sync 0;
+setp.ne.s32	%p10, %r1, 0;
+@%p10 bra BB1_19;
+
+ld.shared.u32 %r39, [_ZZ23mergeHistogram256KernelPjS_jE4data+4];
+ld.shared.u32 %r40, [%r10];
+add.s32 %r41, %r40, %r39;
+st.shared.u32 [%r10], %r41;
+ld.shared.u32 %r42, [_ZZ23mergeHistogram256KernelPjS_jE4data];
+mov.u32 %r43, %ctaid.x;
+cvta.to.global.u64 %rd6, %rd2;
+mul.wide.u32 %rd7, %r43, 4;
+add.s64 %rd8, %rd6, %rd7;
+st.global.u32 [%rd8], %r42;
+
+BB1_19:
+ret;
+}
+
+

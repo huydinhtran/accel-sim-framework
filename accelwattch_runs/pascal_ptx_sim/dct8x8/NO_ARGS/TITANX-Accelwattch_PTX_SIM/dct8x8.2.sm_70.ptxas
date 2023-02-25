@@ -1,0 +1,33 @@
+ptxas info    : 4 bytes gmem, 384 bytes cmem[3]
+ptxas info    : Compiling entry function '_Z27CUDAkernelQuantizationShortPsi' for 'sm_70'
+ptxas info    : Function properties for _Z27CUDAkernelQuantizationShortPsi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 14 registers, 364 bytes cmem[0], 8 bytes cmem[2]
+ptxas info    : Compiling entry function '_Z27CUDAkernelQuantizationFloatPfi' for 'sm_70'
+ptxas info    : Function properties for _Z27CUDAkernelQuantizationFloatPfi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 17 registers, 364 bytes cmem[0], 8 bytes cmem[2]
+ptxas info    : Compiling entry function '_Z19CUDAkernelShortIDCTPsi' for 'sm_70'
+ptxas info    : Function properties for _Z19CUDAkernelShortIDCTPsi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, 2176 bytes smem, 364 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z18CUDAkernelShortDCTPsi' for 'sm_70'
+ptxas info    : Function properties for _Z18CUDAkernelShortDCTPsi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, 2176 bytes smem, 364 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z15CUDAkernel2IDCTPfS_i' for 'sm_70'
+ptxas info    : Function properties for _Z15CUDAkernel2IDCTPfS_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, 2112 bytes smem, 372 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z14CUDAkernel2DCTPfS_i' for 'sm_70'
+ptxas info    : Function properties for _Z14CUDAkernel2DCTPfS_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, 2112 bytes smem, 372 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z15CUDAkernel1IDCTPfiii' for 'sm_70'
+ptxas info    : Function properties for _Z15CUDAkernel1IDCTPfiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 26 registers, 512 bytes smem, 376 bytes cmem[0], 1 textures
+ptxas info    : Compiling entry function '_Z14CUDAkernel1DCTPfiii' for 'sm_70'
+ptxas info    : Function properties for _Z14CUDAkernel1DCTPfiii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 26 registers, 512 bytes smem, 376 bytes cmem[0], 1 textures

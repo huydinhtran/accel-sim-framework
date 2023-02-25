@@ -44,8 +44,9 @@ runs_dir="$ACCELSIM_ROOT/../hw_run/device-0/${CUDA_VERSION}"
 if [ -d ${runs_dir} ] ; then
 	rm -r ${runs_dir}
 fi
-export CUDA_VISIBLE_DEVICES=$DEVID
-$ACCELSIM_ROOT/../util/hw_stats/run_hw.py -D $DEVID -B rodinia-3.1_validation_hw,parboil_validation,cuda_samples_11.0_validation,cutlass_5_trace_validation,cudaTensorCoreGemm_validation --collect other_stats --nsight_profiler --disable_nvprof
+export CUDA_VISIBLE_DEVICES=0
+# $ACCELSIM_ROOT/../util/hw_stats/run_hw.py -D 0 -B rodinia-3.1_validation_hw,parboil_validation,cuda_samples_11.0_validation,cutlass_5_trace_validation --collect other_stats --nsight_profiler --disable_nvprof
+$ACCELSIM_ROOT/../util/hw_stats/run_hw.py -D 0 -B rodinia-3.1_validation_hw,parboil_validation,cuda_samples_11.0_validation,cutlass_5_trace_validation,cudaTensorCoreGemm_validation --collect other_stats --nsight_profiler --disable_nvprof
 $ACCELSIM_ROOT/../util/accelwattch/accelwattch_hw_profiler/gen_hw_perf_csv.py -d ${runs_dir}
 
 mv ${root_dir}/hw_perf.csv $ACCELSIM_ROOT/../util/accelwattch/accelwattch_hw_profiler/hw_perf.csv

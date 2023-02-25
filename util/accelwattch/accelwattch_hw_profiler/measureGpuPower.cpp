@@ -52,6 +52,22 @@
 #include <signal.h>
 #include <nvml.h>
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+#include "ip_connection.h"
+#include "bricklet_voltage_current_v2.h"
+
+#define GPU_NAME "GeForce GTX 1050 Ti"
+
+#define HOST "localhost"
+#define PORT 4223
+#define UID12VPS "HKZ" // Change XYZ to the UID of your Voltage/Current Bricklet 2.0
+#define UID12VMB "HM3" // Change XYZ to the UID of your Voltage/Current Bricklet 2.0
+#define UID3VMB "HL3" // Change XYZ to the UID of your Voltage/Current Bricklet 2.0
+VoltageCurrentV2 vc[3];
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 // CTRL+C handler
 static volatile int exitFlag = 0;
 void intHandler(int v) 
@@ -72,7 +88,7 @@ int init()
     return 1;
 }
 
-int shutdown()
+int shutdownNVML()
 {
     printf("Shutting down NVML... ");
     nvmlReturn_t res;
@@ -188,6 +204,7 @@ int measurePower(char* oFileName, int csv, int devId, nvmlDevice_t* dev, int sam
 			break;
 		}
         res = nvmlDeviceGetUtilizationRates ( *dev, &util);
+	printf("Util: %d\n",util.gpu);
 
         if(util.gpu < 95) {
             if (samplesRemaining >1){
@@ -217,11 +234,45 @@ int measurePower(char* oFileName, int csv, int devId, nvmlDevice_t* dev, int sam
                 sampleCount = 0;
 			}
 		}
+////////////////////////////////////////////////////////////////////////////////////////////
+	/*
         res = nvmlDeviceGetPowerUsage( *dev, &mWatts );
         if( res != NVML_SUCCESS ) {
             printf("Error: failed to get power for device %i: %s\n", devId, nvmlErrorString(res));
             return 0;
         }
+	*/
+
+	nvmlReturn_t result;
+	unsigned int device_count, i;
+	
+	result = nvmlDeviceGetCount(&device_count);
+	if (NVML_SUCCESS != result)
+	{
+		printf("Failed to query device count: %s\n", nvmlErrorString(result));
+		//goto Error;
+    	}	
+
+
+	int32_t power = 0;
+	printf("here\n");
+    	for(int i = 0; i < 3; i++)
+    	{
+
+        	int32_t sensor_power;
+		printf("there\n");
+       	 	if(voltage_current_v2_get_power(&vc[i], &sensor_power) < 0) {
+            		fprintf(stderr, "Could not get power, probably timeout\n");
+           	 	return 0;
+		}
+		printf("Reading power %d: %d\n", i, sensor_power);
+        	power += sensor_power;
+	
+	}
+
+	mWatts = power;   	 
+
+////////////////////////////////////////////////////////////////////////////////////////////
 
         if( printPsuInfo ) {
             res = nvmlDeviceGetPerformanceState(*dev, &pState);
@@ -360,6 +411,27 @@ int parseOptions(int argc, char** argv, char** outFileName, int* csv, int* devId
 
 int main(int argc, char** argv)
 {
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Create IP connection
+    IPConnection ipcon;
+    ipcon_create(&ipcon);
+
+    // Create device object
+    voltage_current_v2_create(&vc[0], UID12VPS, &ipcon);
+    voltage_current_v2_create(&vc[1], UID12VMB, &ipcon);
+    voltage_current_v2_create(&vc[2], UID3VMB, &ipcon);
+    // Connect to brickd
+    if(ipcon_connect(&ipcon, HOST, PORT) < 0) {
+        fprintf(stderr, "Could not connect\n");
+        return 1;
+    }
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     nvmlReturn_t res;
     nvmlDevice_t dev;
     nvmlUnit_t unit;
@@ -390,7 +462,7 @@ int main(int argc, char** argv)
         return EXIT_FAILURE;
 
     if( !getDevice(devId, &dev, &unit) ) {
-        shutdown();
+        shutdownNVML();
         return EXIT_FAILURE;
     }
 
@@ -412,7 +484,7 @@ int main(int argc, char** argv)
 		if( f == NULL ) {
 			printf("Error: failed to run ps command.\n");
 			pclose(f);
-			shutdown();
+			shutdownNVML();
 			return EXIT_FAILURE;
 		}
 		char line[8];
@@ -421,7 +493,7 @@ int main(int argc, char** argv)
 		} else {
 			pclose(f);
 			printf("Error: application not found in process list. Make sure to start application before profiling!\n");
-			shutdown();
+			shutdownNVML();
 			return EXIT_FAILURE;
 		}
 		pclose(f);
@@ -429,14 +501,11 @@ int main(int argc, char** argv)
 	}
 
     if( !measurePower(oFileName, csv, devId, &dev, sampleRate, numSamples, &unit, printPsuInfo, pid, temp_cutoff_T) ) {
-        shutdown();
+        shutdownNVML();
         return EXIT_FAILURE;
     }
 
-    shutdown();
-
-    printf("Complete \n");
-
-    return EXIT_SUCCESS;
-
-} 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+    voltage_current_v2_destroy(&vc[0]);
+    voltage_current_v2_destroy(&vc[1]);
+    voltage_curre

@@ -1,6 +1,6 @@
 # Welcome to the AccelWattch MICRO'21 Artifact Appendix Manual
 
-![AccelWattch Overview](https://github.com/VijayKandiah/accel-sim.github.io/blob/master/assets/img/accelwattch-flowchart.svg)
+![AccelWattch Overview](https://github.com/accel-sim/accel-sim.github.io/blob/master/assets/img/accelwattch-flowchart.svg)
 
 AccelWattch is a cycle-level constant, static and dynamic power modeling framework tuned for the NVIDIA Volta GV100 GPU. If you use any component of AccelWattch, please cite:
 

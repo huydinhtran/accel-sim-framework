@@ -55,11 +55,11 @@ the apps in from this collection as well as just on your own, with your own apps
 
 [GPU App Collection](https://github.com/accel-sim/gpu-app-collection)
 
-AccelWattch microbenchmarks and AccelWattch validation set benchmarks are also included. For more information on these benchmarks, please look at our [MICRO 2021 paper](http://paragon.cs.northwestern.edu/papers/2021-MICRO-AccelWattch-Kandiah.pdf) and [AccelWattch MICRO'21 Artifact Manual](https://github.com/accel-sim/accel-sim-framework/blob/release-accelwattch/AccelWattch.md).
+The 'release-accelwattch' branch of the [GPU App Collection](https://github.com/accel-sim/gpu-app-collection/tree/release-accelwattch) repository also includes the AccelWattch microbenchmarks and AccelWattch validation set benchmarks. For more information on these benchmarks, please look at our [MICRO 2021 paper](http://paragon.cs.northwestern.edu/papers/2021-MICRO-AccelWattch-Kandiah.pdf) and [AccelWattch MICRO'21 Artifact Manual](https://github.com/accel-sim/accel-sim-framework/blob/release-accelwattch/AccelWattch.md).
 
 ## Accel-Sim Components
 
-![Accel-Sim Overview](https://accel-sim.github.io/assets/img/accel-sim-crop.svg)
+![Accel-Sim Overview](https://github.com/accel-sim/accel-sim.github.io/blob/master/assets/img/accel-sim-crop.svg)
 
 1. **Accel-Sim Tracer**: An NVBit tool for generating SASS traces from CUDA applications. Code for the tool lives in ./util/tracer\_nvbit/. To make the tool:  
   
@@ -104,7 +104,6 @@ AccelWattch microbenchmarks and AccelWattch validation set benchmarks are also i
 
 2. **Accel-Sim SASS Frontend and Simulation Engine**: A simulator frontend that consumes SASS traces and feeds them into a performance model. The intial release of Accel-Sim coincides with the release of [GPGPU-Sim 4.0](https://github.com/accel-sim/accel-sim-framework/blob/dev/gpu-simulator/gpgpu-sim4.md), which acts as the detailed performance model. To build the Accel-Sim simulator that uses the traces, do the following:
     ```bash
-    pip3 install -r requirements.txt
     source ./gpu-simulator/setup_environment.sh
     make -j -C ./gpu-simulator/
     ```
@@ -117,19 +116,10 @@ AccelWattch microbenchmarks and AccelWattch validation set benchmarks are also i
     ```bash
     ./util/job_launching/run_simulations.py -B rodinia_2.0-ft -C QV100-SASS -T ./hw_run/traces/device-<device-num>/<cuda-version>/ -N myTest
     ```
-    The above command will run the workloads in Accel-Sim's SASS traces-driven mode. You can also run the workloads in PTX mode using: 
-    ```txt
-    PTX mode usage: ./util/job_launching/run_simulations.py -B <benchmark> -C <gpu_config> -N <run_identifier>
-    Optional:
-    [-B benchmark]              (From the gpu-app-collection compiled in Step 1)
-    [-C gpu_config]             (List of supported configs: accel-sim-framework/util/job_launching/configs/define-standard-cfgs.yml)
-    ```
-    Eg:
+    The above command will run the workloads in Accel-Sim's SASS traces-driven mode. You can also run the workloads in PTX mode using:
     ```bash
     ./util/job_launching/run_simulations.py -B rodinia_2.0-ft -C QV100-PTX -N myTest-PTX
     ```
-    
-    
     You can monitor the tests using:
     ```bash
     ./util/job_launching/monitor_func_test.py -v -N myTest
@@ -255,7 +245,7 @@ CUDA\_INSTALL\_PATH, the run ./travis.sh.
 
 ## AccelWattch Overview
 
-![AccelWattch Overview](https://github.com/VijayKandiah/accel-sim.github.io/blob/master/assets/img/accelwattch-flowchart.svg)
+![AccelWattch Overview](https://github.com/accel-sim/accel-sim.github.io/blob/master/assets/img/accelwattch-flowchart.svg)
 
 1. **Running AccelWattch SASS SIM**: To run *the simple example from bullet 1* with AccelWattch power estimations enabled using the *AccelWattch SASS SIM* model,
 ```bash

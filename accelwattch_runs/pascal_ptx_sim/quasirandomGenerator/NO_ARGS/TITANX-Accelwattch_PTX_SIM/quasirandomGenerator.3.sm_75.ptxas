@@ -1,0 +1,9 @@
+ptxas info    : 0 bytes gmem, 372 bytes cmem[3]
+ptxas info    : Compiling entry function '_Z16inverseCNDKernelPfPjj' for 'sm_75'
+ptxas info    : Function properties for _Z16inverseCNDKernelPfPjj
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 18 registers, 372 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z26quasirandomGeneratorKernelPfjj' for 'sm_75'
+ptxas info    : Function properties for _Z26quasirandomGeneratorKernelPfjj
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 43 registers, 368 bytes cmem[0]

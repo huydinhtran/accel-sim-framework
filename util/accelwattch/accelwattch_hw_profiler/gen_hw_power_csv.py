@@ -49,14 +49,17 @@ for benchmark in ubenchmarks :
 	samples = []
 	mean = 0
 	for each in x:
+		# try:
 		if ((float(each)) == 0): #ignore erronous datapoint- 0Watts
-			continue
-	 	samples.append(float(each))
+				continue
+		samples.append(float(each))
+		# except:
+			# print('Failed to convert to float')
 	datapoints = numpy.array(samples)
 	power_dict[benchmark] = collections.OrderedDict()
 
 	if datapoints.size == 0:
-		print 'No Data for :' + benchmark 
+		print ('No Data for :' + benchmark )
 	else:
 		power_dict[benchmark]["mean HW_power"] = datapoints.mean()
 		power_dict[benchmark]["st_dev"] = datapoints.std()

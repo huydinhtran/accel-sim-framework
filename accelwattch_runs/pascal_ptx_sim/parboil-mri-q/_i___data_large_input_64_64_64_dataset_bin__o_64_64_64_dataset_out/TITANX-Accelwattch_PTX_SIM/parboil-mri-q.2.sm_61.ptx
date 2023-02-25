@@ -1,0 +1,168 @@
+
+
+
+
+
+
+
+
+.version 7.0
+.target sm_61
+.address_size 64
+
+
+.const .align 4 .b8 ck[16384];
+
+.visible .entry _Z17ComputePhiMag_GPUPfS_S_i(
+.param .u64 _Z17ComputePhiMag_GPUPfS_S_i_param_0,
+.param .u64 _Z17ComputePhiMag_GPUPfS_S_i_param_1,
+.param .u64 _Z17ComputePhiMag_GPUPfS_S_i_param_2,
+.param .u32 _Z17ComputePhiMag_GPUPfS_S_i_param_3
+)
+{
+.reg .pred %p<2>;
+.reg .f32 %f<5>;
+.reg .b32 %r<6>;
+.reg .b64 %rd<11>;
+
+
+ld.param.u64 %rd1, [_Z17ComputePhiMag_GPUPfS_S_i_param_0];
+ld.param.u64 %rd2, [_Z17ComputePhiMag_GPUPfS_S_i_param_1];
+ld.param.u64 %rd3, [_Z17ComputePhiMag_GPUPfS_S_i_param_2];
+ld.param.u32 %r2, [_Z17ComputePhiMag_GPUPfS_S_i_param_3];
+mov.u32 %r3, %ctaid.x;
+shl.b32 %r4, %r3, 9;
+mov.u32 %r5, %tid.x;
+add.s32 %r1, %r4, %r5;
+setp.ge.s32	%p1, %r1, %r2;
+@%p1 bra BB0_2;
+
+cvta.to.global.u64 %rd4, %rd1;
+mul.wide.s32 %rd5, %r1, 4;
+add.s64 %rd6, %rd4, %rd5;
+cvta.to.global.u64 %rd7, %rd2;
+add.s64 %rd8, %rd7, %rd5;
+ld.global.f32 %f1, [%rd6];
+ld.global.f32 %f2, [%rd8];
+mul.ftz.f32 %f3, %f2, %f2;
+fma.rn.ftz.f32 %f4, %f1, %f1, %f3;
+cvta.to.global.u64 %rd9, %rd3;
+add.s64 %rd10, %rd9, %rd5;
+st.global.f32 [%rd10], %f4;
+
+BB0_2:
+ret;
+}
+
+
+.visible .entry _Z12ComputeQ_GPUiiPfS_S_S_S_(
+.param .u32 _Z12ComputeQ_GPUiiPfS_S_S_S__param_0,
+.param .u32 _Z12ComputeQ_GPUiiPfS_S_S_S__param_1,
+.param .u64 _Z12ComputeQ_GPUiiPfS_S_S_S__param_2,
+.param .u64 _Z12ComputeQ_GPUiiPfS_S_S_S__param_3,
+.param .u64 _Z12ComputeQ_GPUiiPfS_S_S_S__param_4,
+.param .u64 _Z12ComputeQ_GPUiiPfS_S_S_S__param_5,
+.param .u64 _Z12ComputeQ_GPUiiPfS_S_S_S__param_6
+)
+{
+.reg .pred %p<6>;
+.reg .f32 %f<54>;
+.reg .b32 %r<25>;
+.reg .b64 %rd<25>;
+
+
+ld.param.u32 %r8, [_Z12ComputeQ_GPUiiPfS_S_S_S__param_0];
+ld.param.u32 %r21, [_Z12ComputeQ_GPUiiPfS_S_S_S__param_1];
+ld.param.u64 %rd3, [_Z12ComputeQ_GPUiiPfS_S_S_S__param_2];
+ld.param.u64 %rd4, [_Z12ComputeQ_GPUiiPfS_S_S_S__param_3];
+ld.param.u64 %rd5, [_Z12ComputeQ_GPUiiPfS_S_S_S__param_4];
+ld.param.u64 %rd1, [_Z12ComputeQ_GPUiiPfS_S_S_S__param_5];
+ld.param.u64 %rd2, [_Z12ComputeQ_GPUiiPfS_S_S_S__param_6];
+cvta.to.global.u64 %rd6, %rd2;
+mov.u32 %r11, %ctaid.x;
+shl.b32 %r12, %r11, 8;
+mov.u32 %r13, %tid.x;
+add.s32 %r14, %r12, %r13;
+cvta.to.global.u64 %rd7, %rd3;
+mul.wide.s32 %rd8, %r14, 4;
+add.s64 %rd9, %rd7, %rd8;
+ld.global.f32 %f1, [%rd9];
+cvta.to.global.u64 %rd10, %rd4;
+add.s64 %rd11, %rd10, %rd8;
+ld.global.f32 %f2, [%rd11];
+cvta.to.global.u64 %rd12, %rd5;
+add.s64 %rd13, %rd12, %rd8;
+ld.global.f32 %f3, [%rd13];
+cvta.to.global.u64 %rd14, %rd1;
+add.s64 %rd15, %rd14, %rd8;
+ld.global.f32 %f53, [%rd15];
+add.s64 %rd16, %rd6, %rd8;
+ld.global.f32 %f52, [%rd16];
+and.b32 %r15, %r8, 1;
+setp.eq.b32	%p1, %r15, 1;
+mov.u32 %r22, 0;
+@!%p1 bra BB1_2;
+bra.uni BB1_1;
+
+BB1_1:
+ld.const.f32 %f16, [ck];
+ld.const.f32 %f17, [ck+4];
+mul.ftz.f32 %f18, %f2, %f17;
+fma.rn.ftz.f32 %f19, %f1, %f16, %f18;
+ld.const.f32 %f20, [ck+8];
+fma.rn.ftz.f32 %f21, %f3, %f20, %f19;
+mul.ftz.f32 %f22, %f21, 0f40C90FDB;
+cos.approx.ftz.f32 %f23, %f22;
+ld.const.f32 %f24, [ck+12];
+fma.rn.ftz.f32 %f53, %f24, %f23, %f53;
+sin.approx.ftz.f32 %f25, %f22;
+fma.rn.ftz.f32 %f52, %f24, %f25, %f52;
+add.s32 %r21, %r21, 1;
+mov.u32 %r22, 1;
+
+BB1_2:
+setp.ge.s32	%p2, %r21, %r8;
+@%p2 bra BB1_4;
+
+BB1_3:
+mul.wide.s32 %rd17, %r22, 16;
+mov.u64 %rd18, ck;
+add.s64 %rd19, %rd18, %rd17;
+ld.const.f32 %f26, [%rd19];
+ld.const.f32 %f27, [%rd19+4];
+mul.ftz.f32 %f28, %f2, %f27;
+fma.rn.ftz.f32 %f29, %f1, %f26, %f28;
+ld.const.f32 %f30, [%rd19+8];
+fma.rn.ftz.f32 %f31, %f3, %f30, %f29;
+mul.ftz.f32 %f32, %f31, 0f40C90FDB;
+cos.approx.ftz.f32 %f33, %f32;
+ld.const.f32 %f34, [%rd19+12];
+fma.rn.ftz.f32 %f35, %f34, %f33, %f53;
+sin.approx.ftz.f32 %f36, %f32;
+fma.rn.ftz.f32 %f37, %f34, %f36, %f52;
+ld.const.f32 %f38, [%rd19+16];
+ld.const.f32 %f39, [%rd19+20];
+mul.ftz.f32 %f40, %f2, %f39;
+fma.rn.ftz.f32 %f41, %f1, %f38, %f40;
+ld.const.f32 %f42, [%rd19+24];
+fma.rn.ftz.f32 %f43, %f3, %f42, %f41;
+mul.ftz.f32 %f44, %f43, 0f40C90FDB;
+cos.approx.ftz.f32 %f45, %f44;
+ld.const.f32 %f46, [%rd19+28];
+fma.rn.ftz.f32 %f53, %f46, %f45, %f35;
+sin.approx.ftz.f32 %f47, %f44;
+fma.rn.ftz.f32 %f52, %f46, %f47, %f37;
+add.s32 %r22, %r22, 2;
+setp.lt.s32	%p3, %r22, 1024;
+add.s32 %r21, %r21, 2;
+setp.lt.s32	%p4, %r21, %r8;
+and.pred %p5, %p3, %p4;
+@%p5 bra BB1_3;
+
+BB1_4:
+st.global.f32 [%rd15], %f53;
+st.global.f32 [%rd16], %f52;
+ret;
+}
+
+
