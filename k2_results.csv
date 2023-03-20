@@ -1,0 +1,17 @@
+Benchmark,Real,SASS,PTX
+backprop,45.25252,80.6264,82.5067
+binomialOptions,,73.0814,71.5451
+b+tree,41.5184,73.0814,71.5451
+dct8x8,53.24054,73.0814,71.5451
+fastWalshTransform,52.56158,90.1569,91.1011
+histogram,,73.0814,67.3174
+hotspot,,73.0814,
+kmeans,,80.6264,82.5067
+mergeSort,46.63,77.6445,83.8654
+parboil-mri-q,,67.3174,83.8025
+parboil-sad,,90.1569,91.1011
+parboil-sgemm,,77.6445,83.8654
+pathfinder,,77.6445,
+quasirandomGenerator,66.0979,90.1569,83.8654
+sobolQRNG,,77.6445,83.8654
+srad_v1,,77.6445,71.4038
